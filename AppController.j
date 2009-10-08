@@ -33,18 +33,19 @@
     [secondtabItem setView:[[CPView alloc] initWithFrame:[tabView contentRect]]];
     [tabView addTabViewItem:secondtabItem];
     
+    /*
+        This next line wil trigger the bug in 3 seconds
+    */
     var timer = [CPTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(removeTab) userInfo:nil repeats:NO];
     
     [contentView addSubview:tabView];
 
     [theWindow orderFront:self];
-
-    // Uncomment the following line to turn on the standard menu bar.
-    //[CPMenu setMenuBarVisible:YES];
 }
 
 - (void)removeTab
 {
+    // simply calling removeTabViewItem seems to leave a some stuff behind
     [tabView removeTabViewItem:secondtabItem];
 }
 
